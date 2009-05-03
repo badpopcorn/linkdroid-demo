@@ -1,0 +1,24 @@
+<html>
+  <body>
+    <h1>LinkDroid Demo Site</h1>
+    <p>This page acts as a target Webhook URI that accepts POSTs from
+    the LinkDroid Android application. We display the timestamp
+    at which the post was received, the post variables and a link
+    to the attached file (if it was sent).
+    </p>
+    <p>
+    Select a picture on your Android phone, click "Share With",
+    choose LinkDroid and post to this page.
+    </p>
+    <h2>Latest Posts</h2>
+    <ul>
+    {% for post in posts %}
+      <li>Created At: {{ post.created_at }} <br/>
+        {% if post.mimetype %}
+          <a href="/file?key={{ post.key.id }}">Attached File</a><br/>
+        {% endif %}
+        {{ post.data|escape|linebreaks }}
+      </li>
+    {% endfor %}
+  </body>
+</html>
